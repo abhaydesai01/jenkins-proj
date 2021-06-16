@@ -20,8 +20,8 @@ sgid=`aws ec2 describe-security-groups  --query "SecurityGroups[].GroupId" --fil
 #Adding the inbound rules to the security group created
 aws ec2 authorize-security-group-ingress --group-id $sgid --protocol tcp --port 22 --cidr 0.0.0.0/0
 
-
-aws ec2 run-instances --image-id ami-0ad704c126371a549 --count 1 --instance-type t2.micro --key-name Abhay2 --security-group-ids  sg-04fa0c7c  --tag-specification "ResourceType=instance,Tags=[{Key=Name,Value=$instancename}]"
+#Launching the instance
+aws ec2 run-instances --image-id ami-0ad704c126371a549 --count 1 --instance-type t2.micro --key-name $keyname --security-group-ids $sgid --tag-specification "ResourceType=instance,Tags=[{Key=Name,Value=$instancename}]"
 
 
 #Creating the Volume
